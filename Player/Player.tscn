@@ -16,6 +16,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+speed = 1
 
 [node name="player" type="Sprite" parent="."]
 position = Vector2( 8, 0 )
