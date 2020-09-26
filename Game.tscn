@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/rainfall.webm" type="VideoStream" id=1]
 [ext_resource path="res://Assets/Background.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Assets/BebasNeueRegular.otf" type="DynamicFontData" id=6]
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=7]
 [ext_resource path="res://Enemy/Enemies.gd" type="Script" id=8]
+[ext_resource path="res://Assets/Robotney Theme.wav" type="AudioStream" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -30,6 +31,10 @@ __meta__ = {
 [node name="Player_area" type="Node2D" parent="."]
 
 [node name="Player" parent="Player_area" instance=ExtResource( 3 )]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Player_area/Player"]
+stream = ExtResource( 9 )
+autoplay = true
 
 [node name="Enemies" type="Node2D" parent="."]
 script = ExtResource( 8 )
