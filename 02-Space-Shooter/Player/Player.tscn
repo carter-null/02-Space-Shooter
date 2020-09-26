@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Assets/robotney.png" type="Texture" id=2]
+[ext_resource path="res://Player/Laser.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 17.7289, 31.6387 )
+
+[sub_resource type="CircleShape2D" id=2]
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 522.552, 507.703 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="player" type="Sprite" parent="."]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 2 )
+
+[node name="Damage" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage"]
+shape = SubResource( 1 )
+
+[node name="Laser" type="RayCast2D" parent="."]
+position = Vector2( 0, -35 )
+cast_to = Vector2( 0, 0 )
+script = ExtResource( 3 )
+
+[node name="Target" type="Area2D" parent="Laser"]
+position = Vector2( -522.552, -472.703 )
+monitoring = false
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Laser/Target"]
+shape = SubResource( 2 )
+
+[node name="Line2D" type="Line2D" parent="Laser"]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 3.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+scale = Vector2( 0.2, 0.2 )
+polygon = PoolVector2Array( -59.5, 152, -67, 148.2, -67, 143.9, -65.1, 122.8, -68.4, 137, -69.9, 137, -74.9, 145, -77.7, 145, -83, 141, -83, 136.3, -86, 126.3, -86, 124, -86.7, 124, -92.7, 138, -97.8, 138, -102, 133.8, -102, 118.5, -110.8, 136, -115.8, 136, -120, 131.8, -120, 121, -119, 121, -119, 92, -117.8, 92, -115.8, 77, -114.4, 77, -103, 46.6, -103, 35, -102, 35, -102, 31, -104.3, 13, -102.9, 13, -96.9, -117, -95.1, -117, -79.2, -145, -78, -145, -42, -191.7, -42, -195.2, -32, -190.2, -32, -187.5, -19, -165.5, -19, -164.4, -1, -116.4, -1, -110.8, -5, -94, -5, -89, -6, -10, -7.10001, -10, -10.9, 53, -1, 69.4, -1, 75, 2, 85.7, 2, 149, 0.100006, 149, -5.89999, 159, -10.2, 159, -16.1, 147.2, -17.5, 152, -19.2, 152, -23.2, 156, -26.2, 156, -31.6, 146.2, -35.9, 153, -38.5, 153, -45, 156.2, -45, 152.8, -49, 148.8, -49, 138, -55.7, 152 )
+[connection signal="body_entered" from="Damage" to="." method="_on_Damage_body_entered"]
+[connection signal="body_entered" from="Laser/Target" to="Laser" method="_on_Target_body_entered"]
